@@ -4,7 +4,7 @@ using Reqnroll;
 namespace BuildSmarter.Specs;
 
 [Binding]
-public class ManageBuildingStructure(ScenarioContext scenarioContext, Building building)
+public class ManageBuildingStructure(ScenarioContext scenarioContext)
 {
     private ScenarioContext _scenarioContext = scenarioContext;
     private Building _building;
@@ -63,6 +63,7 @@ public class ManageBuildingStructure(ScenarioContext scenarioContext, Building b
     [Then(@"the building should have (.*) floor with number (.*)")]
     public void ThenTheBuildingShouldHaveFloorWithNumber(int numberOfFloors, int floorNumber)
     {
+        // wrong test!
         Assert.Equal(numberOfFloors, _building.Floors.Count);
     }
 

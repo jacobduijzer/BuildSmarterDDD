@@ -3,7 +3,7 @@
 public class Building(string name)
 {
     public string Name { get; private set; } = name;
-    private List<Floor> _floors = new List<Floor>();
+    private readonly List<Floor> _floors = [];
 
     public IReadOnlyList<Floor> Floors => _floors.AsReadOnly();
 
