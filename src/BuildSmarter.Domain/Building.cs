@@ -4,8 +4,10 @@ public class Building(string name)
 {
     public string Name { get; private set; } = name;
     private readonly List<Floor> _floors = [];
+    private readonly List<object> _domainEvents = [];
 
     public IReadOnlyList<Floor> Floors => _floors.AsReadOnly();
+    public IReadOnlyList<object> DomainEvents => _domainEvents.AsReadOnly();
 
     public void AddFloor(int number)
     {
@@ -14,6 +16,7 @@ public class Building(string name)
             throw new InvalidOperationException("Floor number already exists in this building.");
         
         _floors.Add(new Floor(floorNumber));
+        _domainEvents.Add(new FloorAddedEvent(floorNumber));
     }
 
     public void AddRoomToFloor(int number, string roomName)
@@ -24,4 +27,6 @@ public class Building(string name)
         
         floor.AddRoom(roomName);
     }
+    
+    public void ClearDomainEvents() => _domainEvents.Clear();
 }

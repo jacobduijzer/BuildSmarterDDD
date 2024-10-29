@@ -4,9 +4,10 @@ using Reqnroll;
 namespace BuildSmarter.Specs;
 
 [Binding]
+[Scope(Feature = "Manage Building Structure")]
 public class ManageBuildingStructure(ScenarioContext scenarioContext)
 {
-    private ScenarioContext _scenarioContext = scenarioContext;
+    private readonly ScenarioContext _scenarioContext = scenarioContext;
     private Building _building;
 
     [Given(@"a building named ""(.*)""")]
@@ -60,6 +61,13 @@ public class ManageBuildingStructure(ScenarioContext scenarioContext)
         }
     }
 
+
+    [When(@"I view the details of the building")]
+    public void WhenIViewTheDetailsOfTheBuilding()
+    {
+        // EMPTY ON PURPOSE
+    }
+
     [Then(@"the building should have (.*) floor with number (.*)")]
     public void ThenTheBuildingShouldHaveFloorWithNumber(int numberOfFloors, int floorNumber)
     {
@@ -78,15 +86,9 @@ public class ManageBuildingStructure(ScenarioContext scenarioContext)
     [Then(@"floor (.*) should have a room named ""(.*)""")]
     public void ThenFloorShouldHaveARoomNamed(int number, string roomName)
     {
-        Assert.Contains(_building.Floors, f => 
-            f.FloorNumber.Equals((FloorNumber)number) && 
+        Assert.Contains(_building.Floors, f =>
+            f.FloorNumber.Equals((FloorNumber)number) &&
             f.Rooms.Any(r => r.Name == roomName));
-    }
-
-    [When(@"I view the details of the building")]
-    public void WhenIViewTheDetailsOfTheBuilding()
-    {
-        // EMPTY ON PURPOSE
     }
 
     [Then(@"I should see the following structure:")]
@@ -95,7 +97,7 @@ public class ManageBuildingStructure(ScenarioContext scenarioContext)
         var buildingStructure = table.CreateSet<BuildingStructure>();
         foreach (var structure in buildingStructure)
         {
-            var floor = _building.Floors.FirstOrDefault(f => 
+            var floor = _building.Floors.FirstOrDefault(f =>
                 f.FloorNumber.Equals((FloorNumber)structure.FloorNumber));
             Assert.NotNull(floor);
 
@@ -116,6 +118,14 @@ public class ManageBuildingStructure(ScenarioContext scenarioContext)
         }
     }
 
+    [Then(@"a ""(.*)"" should be raised with floor number (.*)")]
+    public void ThenAShouldBeRaisedWithFloorNumber(string floorAddedEvent, int floorNumber)
+    {
+        var domainEvent = _building.DomainEvents.OfType<FloorAddedEvent>().SingleOrDefault();
+        Assert.NotNull(domainEvent);
+        Assert.Equal(floorNumber, domainEvent.FloorNumber);
+    }
+    
     private class BuildingStructure
     {
         public int FloorNumber { get; set; }

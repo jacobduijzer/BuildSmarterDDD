@@ -306,6 +306,37 @@ namespace BuildSmarter.Specs
             await this.ScenarioCleanupAsync();
         }
         
+        [Xunit.SkippableFactAttribute(DisplayName="Adding a new floor raises a domain event")]
+        [Xunit.TraitAttribute("FeatureTitle", "Manage Building Structure")]
+        [Xunit.TraitAttribute("Description", "Adding a new floor raises a domain event")]
+        public async System.Threading.Tasks.Task AddingANewFloorRaisesADomainEvent()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Adding a new floor raises a domain event", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 47
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 48
+        await testRunner.GivenAsync("a building named \"Empire State Building\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 49
+        await testRunner.WhenAsync("I add a floor with number 1 to the building", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 50
+        await testRunner.ThenAsync("a \"FloorAddedEvent\" should be raised with floor number 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : object, Xunit.IAsyncLifetime

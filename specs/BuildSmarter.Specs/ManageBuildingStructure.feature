@@ -43,3 +43,8 @@ So that the building's structure is consistent and rooms are correctly organized
           | Floor Number | Rooms                    |
           | 1            | Lobby, Conference Room A |
           | 2            |                          |
+          
+    Scenario: Adding a new floor raises a domain event
+        Given a building named "Empire State Building"
+        When I add a floor with number 1 to the building
+        Then a "FloorAddedEvent" should be raised with floor number 1

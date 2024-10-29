@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\BuildSmarter.Domain\BuildSmarter.Domain.csproj" />
+      <ProjectReference Include="..\..\src\BuildSmarter.Infrastructure\BuildSmarter.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

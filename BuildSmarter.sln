@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildSmarter.Domain", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildSmarter.Specs", "specs\BuildSmarter.Specs\BuildSmarter.Specs.csproj", "{1AE3DA13-7A56-4897-8F34-CB3E93DD6F7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildSmarter.Infrastructure", "src\BuildSmarter.Infrastructure\BuildSmarter.Infrastructure.csproj", "{8CECAB15-57AA-4539-BA37-CF4552F2C89B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{1AE3DA13-7A56-4897-8F34-CB3E93DD6F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AE3DA13-7A56-4897-8F34-CB3E93DD6F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AE3DA13-7A56-4897-8F34-CB3E93DD6F7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CECAB15-57AA-4539-BA37-CF4552F2C89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CECAB15-57AA-4539-BA37-CF4552F2C89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CECAB15-57AA-4539-BA37-CF4552F2C89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CECAB15-57AA-4539-BA37-CF4552F2C89B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
