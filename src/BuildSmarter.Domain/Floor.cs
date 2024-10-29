@@ -1,9 +1,9 @@
 ﻿namespace BuildSmarter.Domain;
 
-public class Floor(int number)
+public class Floor(FloorNumber floorNumber)
 {
-    public int Number { get; private set; } = number;
-    private readonly List<Room> _rooms = new List<Room>();
+    public FloorNumber FloorNumber => floorNumber;
+    private readonly List<Room> _rooms = [];
 
     public IReadOnlyList<Room> Rooms => _rooms.AsReadOnly();
 

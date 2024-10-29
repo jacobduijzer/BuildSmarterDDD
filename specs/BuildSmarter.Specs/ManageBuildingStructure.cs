@@ -4,11 +4,10 @@ using Reqnroll;
 namespace BuildSmarter.Specs;
 
 [Binding]
-public class ManageBuildingStructure(ScenarioContext scenarioContext)
+public class ManageBuildingStructure(ScenarioContext scenarioContext, Building building)
 {
     private ScenarioContext _scenarioContext = scenarioContext;
     private Building _building;
-
 
     [Given(@"a building named ""(.*)""")]
     public void GivenABuildingNamed(string buildingName)
@@ -76,14 +75,17 @@ public class ManageBuildingStructure(ScenarioContext scenarioContext)
     }
 
     [Then(@"floor (.*) should have a room named ""(.*)""")]
-    public void ThenFloorShouldHaveARoomNamed(int floorNumber, string roomName)
+    public void ThenFloorShouldHaveARoomNamed(int number, string roomName)
     {
-        Assert.Contains(_building.Floors, f => f.Number == floorNumber && f.Rooms.Any(r => r.Name == roomName));
+        Assert.Contains(_building.Floors, f => 
+            f.FloorNumber.Equals((FloorNumber)number) && 
+            f.Rooms.Any(r => r.Name == roomName));
     }
 
     [When(@"I view the details of the building")]
     public void WhenIViewTheDetailsOfTheBuilding()
     {
+        // EMPTY ON PURPOSE
     }
 
     [Then(@"I should see the following structure:")]
@@ -92,7 +94,8 @@ public class ManageBuildingStructure(ScenarioContext scenarioContext)
         var buildingStructure = table.CreateSet<BuildingStructure>();
         foreach (var structure in buildingStructure)
         {
-            var floor = _building.Floors.FirstOrDefault(f => f.Number == structure.FloorNumber);
+            var floor = _building.Floors.FirstOrDefault(f => 
+                f.FloorNumber.Equals((FloorNumber)structure.FloorNumber));
             Assert.NotNull(floor);
 
             if (string.IsNullOrEmpty(structure.Rooms))

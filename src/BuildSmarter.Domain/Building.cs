@@ -2,7 +2,6 @@
 
 public class Building(string name)
 {
-    public Guid Id { get; private set; } = Guid.NewGuid();
     public string Name { get; private set; } = name;
     private List<Floor> _floors = new List<Floor>();
 
@@ -10,15 +9,16 @@ public class Building(string name)
 
     public void AddFloor(int number)
     {
-        if (_floors.Any(f => f.Number == number))
+        var floorNumber = new FloorNumber(number);
+        if (_floors.Any(f => f.FloorNumber.Equals(floorNumber)))
             throw new InvalidOperationException("Floor number already exists in this building.");
         
-        _floors.Add(new Floor(number));
+        _floors.Add(new Floor(floorNumber));
     }
 
-    public void AddRoomToFloor(int floorNumber, string roomName)
+    public void AddRoomToFloor(int number, string roomName)
     {
-        var floor = _floors.SingleOrDefault(f => f.Number == floorNumber);
+        var floor = _floors.SingleOrDefault(f => f.FloorNumber.Equals((FloorNumber)number));
         if (floor == null)
             throw new InvalidOperationException("Floor does not exist.");
         
